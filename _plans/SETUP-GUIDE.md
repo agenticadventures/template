@@ -148,8 +148,12 @@ This is the step that keeps everything off your computer.
     ```bash
     claude
     ```
-    Accept the one-time warning the first time. With the persisted `~/.claude` volume it won't
-    reappear on later rebuilds.
+ - Select your terminal display colors
+ - Choose Yes to use API key
+ - Acknowledge mistakes
+ - Choose Yes to recommended settings
+ - Choose Yes to trust folder
+ - Accept the one-time Bypass Permissions warning the first time. With the persisted `~/.claude` volume it won't reappear on later rebuilds.
 
 > **Don't run `claude login`.** With `ANTHROPIC_API_KEY` set, Claude Code uses the capped key
 > automatically. Logging in with a Pro/Max account would pull the agent *off* the capped key and
