@@ -1,0 +1,24 @@
+{
+  "name": "claude-agent",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "remoteUser": "node",
+
+  // Persist Claude Code's user config (including the one-time bypass acceptance)
+  // across Codespace rebuilds, so you don't re-accept the warning each time.
+  "mounts": [
+    "source=claude-agent-config,target=/home/node/.claude,type=volume"
+  ],
+
+  // 1. Fix ownership of the persisted volume for the non-root 'node' user.
+  // 2. Install Claude Code (npm package needs Node 18+; this image has it).
+  // 3. Alias `claude` so every session runs fully unprompted — the reliable
+  //    method, since the settings-file default has had bugs across versions.
+  "postCreateCommand": "sudo chown -R node:node /home/node/.claude && npm install -g @anthropic-ai/claude-code && grep -q 'alias claude=' ~/.bashrc || echo \"alias claude='claude --dangerously-skip-permissions'\" >> ~/.bashrc",
+
+  "customizations": {
+    "vscode": {
+      // Optional in-editor chat/diff panel. Remove if you only want the terminal REPL.
+      "extensions": ["anthropic.claude-code"]
+    }
+  }
+}
